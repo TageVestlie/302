@@ -34,6 +34,3 @@ mergedata_H_df <-
   summarise(total_production = sum(production, na.rm = T)) %>% 
   ungroup()
 
-
-tobbe <- merge(mergedata_A_df, mergedata_H_df, by = "site")
-
