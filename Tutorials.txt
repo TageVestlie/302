@@ -1,0 +1,11 @@
+devtools::install_github("biostats-r/biostats.tutorials")
+library("biostats.tutorials")
+publication_bias_tutorials()
+
+order:
+naming-objects
+function-packages
+importing-data
+using-dplyr
+Dates-and-times
+text-manipulation
