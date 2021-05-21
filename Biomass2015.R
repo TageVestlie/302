@@ -34,3 +34,16 @@ mergedata_H_df <-
   summarise(total_production = sum(production, na.rm = T)) %>% 
   ungroup()
 
+tosett <- dplyr::full_join(mergedata_H_df, mergedata_A_df)
+
+tredjesett <- dplyr::full_join(tosett, mergedata_M_df)
+
+fullsett <- dplyr::full_join(tredjesett, mergedata_L_df)
+
+plot1 <- ggplot(data = fullsett, aes(site, total_production))+
+  geom_boxplot(fill = "orange", alpha = 0.3)+
+  labs( x = "Site", y= "Biomass") + 
+  theme_light()
+  
+plot1
+
