@@ -2,15 +2,13 @@
 title: "Mt. Gongga test"
 author: "Tage Vestlie"
 output: html_document
-
-
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introduction 
+# Introduction
 
 This is a test looking at my interpretation of the ***Mt.Gongga*** data
 

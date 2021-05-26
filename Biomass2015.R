@@ -51,7 +51,7 @@ fullsett <- dplyr::full_join(tredjesett, mergedata_L_df)
 
 p1 <-fullsett %>%
   ggplot(aes(site, total_production))+
-  geom_boxplot(fill = "orange","blue","green","red", alpha = 0.3)+
+  geom_boxplot(fill = c("orange","blue","green","red"), alpha = 0.3)+
   labs( x = "Site", y= "Biomass") + 
   theme_light()
   
