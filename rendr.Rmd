@@ -1,0 +1,74 @@
+---
+title: "Mt. Gongga test"
+author: "Tage Vestlie"
+output: html_document
+
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction 
+
+This is a test looking at my interpretation of the ***Mt.Gongga*** data
+
+### *Importing Data*
+
+In the future i should use map to get all the data in one tab, so I don't need to use 4 different datasets. This would solve the merging down in the code.
+
+```{r Gonga_data, results = "hide", warning=FALSE}
+library(readxl)
+library(tidyverse)
+datafile <- "biomass2015.xls"
+data_L <- read_excel(datafile, sheet = "Site L")
+data_M <- read_excel(datafile, sheet = "Site M")
+data_A <- read_excel(datafile, sheet = "Site A")
+data_H <- read_excel(datafile, sheet = "Site H")
+```
+
+### *Manipulating Data*
+
+My goal is to remove the data im not interested in.
+
+```{r Gonga_plot, fig.cap= "My Boxplot"}
+mergedata_L_df <- 
+  data_L %>% 
+  group_by(plot,site) %>% 
+  summarise(total_production = sum(production, na.rm = TRUE)) %>% 
+  ungroup()
+mergedata_M_df <- 
+  data_M %>% 
+  group_by(plot,site) %>% 
+  summarise(total_production = sum(production, na.rm = TRUE)) %>% 
+  ungroup()
+mergedata_A_df <- 
+  data_A %>% 
+  group_by(plot,site) %>% 
+  summarise(total_production = sum(production, na.rm = TRUE)) %>% 
+  ungroup()
+mergedata_H_df <- 
+  data_H %>% 
+  group_by(plot,site) %>% 
+  summarise(total_production = sum(production, na.rm = T)) %>% 
+  ungroup()
+tosett <- dplyr::full_join(mergedata_H_df, mergedata_A_df)
+tredjesett <- dplyr::full_join(tosett, mergedata_M_df)
+fullsett <- dplyr::full_join(tredjesett, mergedata_L_df)
+
+```
+
+## *Graph*
+
+Simple boxplot of my results
+
+```{r Gonga datamapped}
+p1 <-fullsett %>%
+  ggplot(aes(site, total_production))+
+  geom_boxplot(fill =c("orange","blue","green","red"), alpha = 0.3)+
+  labs( x = "Site", y= "Biomass") + 
+  theme_light()
+  
+p1
+```
