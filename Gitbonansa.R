@@ -8,3 +8,6 @@ use_git_config(
 use_git()
 use_github()
 create_from_github("TageVestlie/302")
+usethis::use_git_remote("origin", url = NULL, overwrite = TRUE)
+create_github_token()
+gitcreds::gitcreds_set()

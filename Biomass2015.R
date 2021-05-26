@@ -1,13 +1,18 @@
 setwd("C:/Users/tagev/OneDrive/Documents/302")
 library(tidyverse)
-library(stringr)
 library(readxl)
-library(dplyr)
-data_L <- read_excel("biomass2015.xls", sheet = 1)
-data_M <- read_excel("biomass2015.xls", sheet = 2)
-data_A <- read_excel("biomass2015.xls", sheet = 3)
-data_H <- read_excel("biomass2015.xls", sheet = 4)
 
+excel_sheets("C:/Users/tagev/OneDrive/Documents/302/biomass2015.xls")
+
+datafile <- "biomass2015.xls"
+
+####Import data ####
+data_L <- read_excel(datafile, sheet = "Site L")
+data_M <- read_excel(datafile, sheet = "Site M")
+data_A <- read_excel(datafile, sheet = "Site A")
+data_H <- read_excel(datafile, sheet = "Site H")
+
+##### Grouping the plots ####
 mergedata_L_df <- 
   data_L %>% 
   group_by(plot,site) %>% 
@@ -15,7 +20,7 @@ mergedata_L_df <-
   ungroup()
   
 
-222
+
 mergedata_M_df <- 
   data_M %>% 
   group_by(plot,site) %>% 
@@ -34,16 +39,22 @@ mergedata_H_df <-
   summarise(total_production = sum(production, na.rm = T)) %>% 
   ungroup()
 
+#### Merging the datasets ####
 tosett <- dplyr::full_join(mergedata_H_df, mergedata_A_df)
 
 tredjesett <- dplyr::full_join(tosett, mergedata_M_df)
 
 fullsett <- dplyr::full_join(tredjesett, mergedata_L_df)
+#kan bruke bind_rows(Site_L, Site_H, ...)
 
-plot1 <- ggplot(data = fullsett, aes(site, total_production))+
-  geom_boxplot(fill = "orange", alpha = 0.3)+
+#### Plotting ####
+
+p1 <-fullsett %>%
+  ggplot(aes(site, total_production))+
+  geom_boxplot(fill = "orange","blue","green","red", alpha = 0.3)+
   labs( x = "Site", y= "Biomass") + 
   theme_light()
   
-plot1
+p1
+
 
