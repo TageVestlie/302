@@ -26,3 +26,6 @@ new_penguins %>%
   labs(x="Bill length(mm)",y = "Count") +
   geom_vline(xintercept = bill_length_mean$mean, linetype = 2,colour = "maroon", size= 1) +
   geom_vline(xintercept = bill_length_median$median, linetype = 3,colour = "dark blue", size = 1)
+
+
+#
