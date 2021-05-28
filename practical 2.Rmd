@@ -1,0 +1,69 @@
+---
+title: "Linear models"
+author: "Richard J. Telford"
+date: "May 26, 2016"
+output: html_document
+---
+# Tage Vestlie
+
+## Practical 2
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Linear Modelling Exercises
+
+
+1. Import the penguin data from the `palmerpenguin` package
+```{r ,results = "hide", warning=FALSE}
+
+library(tidyverse)
+library(palmerpenguins)
+View(penguins)
+new_penguins<- penguins%>% 
+  drop_na()
+```
+2. Do big birds have big beaks? Fit a linear model between bill length and body mass, and interpret the coefficients.
+```{r}
+
+new_penguins %>% 
+  ggplot(aes(x=body_mass_g,y = bill_length_mm))+
+  geom_point() +
+  stat_smooth(method = "lm" , col = "red") +
+  labs(x= "Body mass(g)", y= "bill length(mm)" )
+
+fit_lm1 <- lm(bill_length_mm~body_mass_g, data = new_penguins)
+summary(fit_lm1)
+
+```
+
+3. Examine the diagnostics plots. Is everything OK?
+```{r}
+x11()
+par(mfrow=c(2,2))
+plot(fit_lm1)
+```
+3. Calculate the residual sum of squares (find sum the squared difference between the estimates calculated from the coefficients and the observed values).
+```{r}
+sum(resid(fit_lm1)^2)#shortcut
+sum((new_penguins$bill_length_mm-((2.715*10^1)+((4.003*10^-3)*new_penguins$body_mass_g)))^2, na.rm=TRUE)#full calculation
+```
+4. Recalculate the Residual sum of squares using different values for the coefficients (in the formula yi = Beta + Beta xi + εi).
+5. Is the new RSS larger or smaller?
+6. Estimate the slope using covariance and variance.
+7. Do you get the same result?
+8. Add species to the model as a predictor.
+
+```{r} 
+new_penguins %>% 
+  ggplot(aes(x=body_mass_g,y = bill_length_mm, fill=species))+
+  geom_point() +
+  stat_smooth(method = "lm" , col = "red") +
+  labs(x= "Body mass(g)", y= "bill length(mm)" )
+```
+9. Does species improve the model?
+10. How should the coefficients be interpreted?
+

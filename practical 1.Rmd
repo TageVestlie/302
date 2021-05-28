@@ -13,13 +13,48 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Load the `palmerpenguins` package and see the `penguins` data.
 
+```{r}
+
+library(tidyverse)
+library(palmerpenguins)
+View(penguins)
+```
 Find the range, mean, median and variance of variable `bill_length_mm`.
+```{r}
+new_penguins<- penguins%>% 
+  drop_na()
+
+new_penguins %>% 
+  summarise(mean = mean(bill_length_mm), 
+            medial= median(bill_length_mm),
+            range= range(bill_length_mm),
+            variance=var(bill_length_mm))
+
+```
 
 What is the standard error of the mean of `bill_length_mm`.
+```{r}
+new_penguins %>% 
+  summarise(sd(bill_length_mm))
+```
+Plot a histogram of variable `bill_length_mm` + Mark the position of the mean and median.
 
-Plot a histogram of variable `bill_length_mm`.
+```{r}
+#First create an environment for mean and median. 
+bill_length_mean <- new_penguins %>% 
+  summarise(mean = mean(bill_length_mm))
 
-Mark the position of the mean and median.
+bill_length_median <- new_penguins %>% 
+  summarise(median = median(bill_length_mm))
+
+#Creating the graph 
+new_penguins %>% 
+  ggplot(aes(x=bill_length_mm))+
+  geom_histogram(binwidth=1, color = "black", fill = "magenta", alpha=0.3) +
+  labs(x="Bill length(mm)",y = "Count") +
+  geom_vline(xintercept = bill_length_mean$mean, linetype = 2,colour = "maroon", size= 1) +
+  geom_vline(xintercept = bill_length_median$median, linetype = 3,colour = "dark blue", size = 1)
+```
 
 Plot `bill_length_mm` against `bill_depth_mm`
 
