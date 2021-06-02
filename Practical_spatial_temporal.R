@@ -33,7 +33,7 @@ summary(x1_gls)
 #7) Repeat the above 1000 times and find how autocorrelation affects the distribution of the p-value and the effect size.
 library(broom.mixed)
 
-rerun(10000, {x1.sim <- arima.sim(list(order = c(1,0,0), ar = 0.5), n = 100 )
+rerun(1000, {x1.sim <- arima.sim(list(order = c(1,0,0), ar = 0.5), n = 100 )
 
 lm(x1.sim~time(x1.sim))}) %>% 
   map_dfr(glance) %>% 
