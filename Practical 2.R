@@ -27,6 +27,7 @@ plot(fit_lm1)
 
 #3. Calculate the residual sum of squares 
 #(find sum the squared difference between the estimates calculated from the coefficients and the observed values).#
+
 sum(resid(fit_lm1)^2)#shortcut
 sum((new_penguins$bill_length_mm-((2.715*10^1)+((4.003*10^-3)*new_penguins$body_mass_g)))^2, na.rm=TRUE)#full calculation
 
@@ -34,6 +35,10 @@ sum((new_penguins$bill_length_mm-((2.715*10^1)+((4.003*10^-3)*new_penguins$body_
 #beta 1 = estumate body_mass
 #y= bill_length 
 #x = bodymass 
+
+deviance(fit_lm1)
+sum(resid(fit_lm1)^2)
+
 #Add species to the model as a predictor
 new_penguins %>% 
   ggplot(aes(x=body_mass_g,y = bill_length_mm, fill=species))+

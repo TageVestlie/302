@@ -46,11 +46,16 @@ x11()
 par(mfrow=c(2,2))
 plot(fit_lm1)
 ```
+<<<<<<< HEAD
 3. Calculate the residual sum of squares (find sum the squared difference between the estimates calculated from the coefficients and the observed values).
 ```{r}
 sum(resid(fit_lm1)^2)#shortcut
 sum((new_penguins$bill_length_mm-((2.715*10^1)+((4.003*10^-3)*new_penguins$body_mass_g)))^2, na.rm=TRUE)#full calculation
 ```
+=======
+
+3. Calculate the residual sum of squares (find sum the squared difference between the estimates calculated from the coefficients and the observed values).
+>>>>>>> 3d0d96dfbbe23dcb977bd5ece5333610e755f88d
 4. Recalculate the Residual sum of squares using different values for the coefficients (in the formula yi = Beta + Beta xi + εi).
 5. Is the new RSS larger or smaller?
 6. Estimate the slope using covariance and variance.
