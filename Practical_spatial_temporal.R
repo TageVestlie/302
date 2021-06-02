@@ -31,13 +31,14 @@ x1_gls <- gls(x1~time(x1), corr=corAR1())
 summary(x1_gls)
 ##not sure if the p value got any better. seems like it got worse 
 #7) Repeat the above 1000 times and find how autocorrelation affects the distribution of the p-value and the effect size.
-x2 <- arima.sim(list(order = c(1,0,0), ar = 0.5), n = 1000)
-plot(x2)
-lm_2<- lm(x2~time(x2))
-summary(lm_2)
+library(broom.mixed)
 
-x2_gls <- gls(x2~time(x2), corr=corAR1())
-summary(x2_gls)
+rerun(10000, {x1.sim <- arima.sim(list(order = c(1,0,0), ar = 0.5), n = 100 )
+
+lm(x1.sim~time(x1.sim))}) %>% 
+  map_dfr(glance) %>% 
+  ggplot(aes(x = p.value)) +
+  geom_histogram()
 ## Real data#####
 
 #1) The built-in dataset LakeHuron has annual lake level data from 1885 to 1972
