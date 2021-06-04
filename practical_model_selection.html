@@ -237,6 +237,7 @@ anova(lm_df,lm_df2)</code></pre>
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <ol start="4" style="list-style-type: decimal">
+<<<<<<< HEAD
 <li>How should the p-values be interpreted. # They might look significant, so you can interperate them that its likely that the corelation is significant ## Exploratory model building</li>
 </ol>
 <p>Normally you would be doing this on a separate data set</p>
@@ -691,6 +692,22 @@ mods$m4 &lt;- lm(bill_length_mm~ sex * species , data = penguins_df)</code></pre
 </div>
 <div id="weights-for-model-2-is-0.44" class="section level1">
 <h1>weights for model 2 is 0.44</h1>
+=======
+<li>How should the p-values be interpreted.</li>
+</ol>
+</div>
+<div id="exploratory-model-building" class="section level2">
+<h2>Exploratory model building</h2>
+<p>Normally you would be doing this on a separate data set</p>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Use forward selection to find the best model to explain bill length.</p></li>
+<li><p>Build a set of candidate models to explain bill depth using one or two predictors.</p></li>
+<li><p>Extract the AIC from each models (hint use function <code>AIC</code>). Which is the better model?</p></li>
+<li><p>Calculate the deltaAIC for each model.</p></li>
+<li><p>Calculate the AIC weights for each model. Interpret these weights.</p></li>
+</ol>
+</div>
+>>>>>>> c0877c2b7119a78afd8982a39cd1b22f3eab7e49
 <div id="collinearity" class="section level2">
 <h2>Collinearity</h2>
 <ol start="12" style="list-style-type: decimal">
@@ -699,7 +716,10 @@ mods$m4 &lt;- lm(bill_length_mm~ sex * species , data = penguins_df)</code></pre
 <li><p>Use <code>MASS::mvrnorm()</code> to simulate 100 observation of two predictor variables (x and z) with a given correlation. Simulate a response variable y = b0 + b1x + b2z. Test how the uncertainty in the coefficients changes with the correlation (and hence vif) of the predictor variables.</p></li>
 </ol>
 </div>
+<<<<<<< HEAD
 </div>
+=======
+>>>>>>> c0877c2b7119a78afd8982a39cd1b22f3eab7e49
 
 
 

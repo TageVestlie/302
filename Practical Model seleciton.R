@@ -33,7 +33,11 @@ anova(lm_df,lm_df2)
 
 
 #5. Use forward selection to find the best model to explain bill length.
+<<<<<<< HEAD
 mod3 <- lm(bill_length_mm~.^2-year, data = penguins_df)
+=======
+mod <- lm(bill_length_mm ~ species * sex + I(species ^ 2) * sex, data = penguins_df)
+>>>>>>> c0877c2b7119a78afd8982a39cd1b22f3eab7e49
 summary(mod)
 mod2 <- stepAIC(mod, k = 2)
 
@@ -55,10 +59,15 @@ aictab(mods)
 # weights for model 1 is 0.56
 # weights for model 2 is 0.44
 
+<<<<<<< HEAD
+=======
+exp(-0.5*0.46)/1.5*exp(-0.5*0.46)
+>>>>>>> c0877c2b7119a78afd8982a39cd1b22f3eab7e49
 
 ## Collinearity 
 
 #12. Make a model predicting bill_length from all other variables. Find the VIF of each predictor. Are there any problem variables? `olsrr::ols_vif_tol`
+<<<<<<< HEAD
 mod3 <- lm(bill_length_mm~.^2-year, data = penguins_df)
 library(olsrr)
 
@@ -67,5 +76,10 @@ olsrr::ols_vif_tol(mod3)
 
 library(GGally)
 GGally::ggpairs(mod3)
+=======
+olsrr::ols_vif_tol
+#13. Use `GGally::ggpairs()` to plot the data to try to identify the cause of any high vif.
+
+>>>>>>> c0877c2b7119a78afd8982a39cd1b22f3eab7e49
 
 #14. Use `MASS::mvrnorm()` to simulate 100 observation of two predictor variables (x and z) with a given correlation. Simulate a response variable y = b0 + b1x + b2z. Test how the uncertainty in the coefficients changes with the correlation (and hence vif) of the predictor variables.
